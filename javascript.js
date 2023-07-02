@@ -1,15 +1,52 @@
-let answer = parseInt(prompt("Please enter the number you would like to FizzBuzz up to: "));
-
-let output = "";
-for (let i = 1; i <= answer; i++) {
-    output = "";
-    output += i % 3 === 0 ? "Fizz" : "";
-    output += i % 5 === 0 ? "Buzz" : "";
-
-    if (output.length > 0) {
-        console.log(output);
+function getComputerChoice() {
+    var result = "";
+    var randomChoice = Math.floor(Math.random() * 3);
+    if (randomChoice === 1) {
+        result = "Rock";
+    }
+    else if (randomChoice === 2) {
+        result = "Paper";
     }
     else {
-        console.log(i);
+        result = "Scissors";
     }
+
+    return result;
 }
+
+function playRound(playerSelection, computerSelection) {
+    var result = "";
+    if (playerSelection.toLowerCase() === "rock" && computerSelection.toLowerCase() === "scissors") {
+        result = "You win! Rock beats Scissors!";
+    }
+    else if (playerSelection.toLowerCase() === "paper" && computerSelection.toLowerCase() === "rock") {
+        result = "You win! Paper beats Rock!";
+    }
+    else if (playerSelection.toLowerCase() === "scissors" && computerSelection.toLowerCase() === "paper") {
+        result = "You win! Scissors beats Paper!";
+    }
+    else if (playerSelection.toLowerCase() != computerSelection.toLowerCase()) {
+        result = "You lose! " + capitalize(computerSelection) + " beats " + capitalize(playerSelection);
+    }
+    else {
+        result = "Try again, same value."
+    }
+
+    return result;
+}
+
+function capitalize(str) {
+    return str[0].toUpperCase() + str.slice(1).toLowerCase();
+}
+
+function game() {
+    var score = 0;
+    for (let index = 0; index < 5; index++) {
+        var playerSelection = prompt("Rock, Paper or Scissors?");
+        console.log(playRound(playerSelection, getComputerChoice()));
+    }
+
+}
+
+game();
+
